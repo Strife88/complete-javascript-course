@@ -47,13 +47,12 @@ document.querySelector('.dice').src = 'dice-' + diceRoll + '.png';
 
 //3 if player press HOLD
 document.querySelector('.btn-hold').addEventListener('click', function() {
-document.getElementById('score-0').textContent = score;
-nextPlayer();
+
+playerScore[activePlayer] += score;
+document.getElementById('score-'+ activePlayer).textContent = playerScore[activePlayer];
+nextPlayer()
 
 })
-
-//3.1 getHisScore to GLOBAL
-//3.1 NextPlayer Plays
 
 
 var nextPlayer = function () {
