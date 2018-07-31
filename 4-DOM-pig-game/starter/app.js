@@ -28,22 +28,43 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
   //1 tap button roll dice
   //2 active player gets a currentscore
 diceRoll = Math.floor(Math.random()*6+1);
+document.querySelector('.dice').style.display = 'block';
+document.querySelector('.dice').src = 'dice-' + diceRoll + '.png';
   if (diceRoll !== 1) {
     score += diceRoll;
-    console.log(diceRoll);
     document.getElementById('current-'+ activePlayer).textContent = score;
-    document.querySelector('.dice').style.display = 'block';
-    document.querySelector('.dice').src = 'dice-' + diceRoll + '.png';
+
   }  else {
-    document.querySelector('.dice').style.display = 'none';
-    console.log(diceRoll);
-    document.getElementById('current-'+ activePlayer).textContent = 0;
-    activePlayer === 0? activePlayer = 1: activePlayer =0;
-    score = 0;
+    nextPlayer();
+
   }
  if ( playerScore[activePlayer] >=100 ) {
    document.querySelector('.dice').style.display = 'none';
-   document.getElementById('score-'+ activePlayer).textContent = Winner!;
+   document.getElementById('score-' + activePlayer).textContent = 'Winner!';
  }
 
 })
+
+//3 if player press HOLD
+document.querySelector('.btn-hold').addEventListener('click', function() {
+document.getElementById('score-0').textContent = score;
+nextPlayer();
+
+})
+
+//3.1 getHisScore to GLOBAL
+//3.1 NextPlayer Plays
+
+
+var nextPlayer = function () {
+document.getElementById('current-'+ activePlayer).textContent = 0;
+activePlayer === 0? activePlayer = 1: activePlayer =0;
+score = 0;
+
+document.getElementById('current-1').textContent = 0;
+document.getElementById('current-0').textContent = 0;
+
+document.querySelector('.player-0-panel').classList.toggle('active');
+document.querySelector('.player-1-panel').classList.toggle('active');
+document.querySelector('.dice').style.display = 'none';
+}
